@@ -1,0 +1,103 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Меню" display-tooltip-when-elided="true" style="-unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&apos;); font-size: 14px; color: rgb(231, 231, 231); -unity-text-align: middle-center;" />
+    <ui:GroupBox name="BigBoss" style="flex-direction: row; height: 40px;">
+        <ui:Button text="Общие" display-tooltip-when-elided="true" name="MainBtn" style="align-items: flex-start; height: 30%; width: 20%;" />
+        <ui:Button text="Клавиши" display-tooltip-when-elided="true" name="KeysBtn" style="align-items: flex-start; width: 20%; height: 30%;" />
+        <ui:Button text="Карта" display-tooltip-when-elided="true" name="MapBtn" style="width: 20%; align-items: flex-start; height: 30%;" />
+        <ui:Button text="Инвентарь" display-tooltip-when-elided="true" name="InventoryBtn" style="height: 30%;" />
+    </ui:GroupBox>
+    <ui:GroupBox name="Main" style="visibility: visible; display: flex; overflow: visible;">
+        <ui:GroupBox name="SensivityGroup" style="flex-direction: column; padding-top: 0; padding-bottom: 0; margin-bottom: 0; margin-top: 0;">
+            <ui:Label text="Чувствительность: 0,30" display-tooltip-when-elided="true" name="SensivityLabel" style="color: rgb(219, 219, 219); height: 20px; margin-top: 1px;" />
+            <ui:Slider picking-mode="Ignore" value="30" high-value="300" show-input-field="false" name="Sensivity" focusable="true" page-size="0" style="width: 97%; color: rgb(214, 214, 214); -unity-text-outline-color: rgb(0, 0, 0); white-space: nowrap; -unity-font-style: normal; -unity-text-align: upper-right; margin-top: 1px;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="AudioEffectsGroup" style="flex-direction: column; padding-top: 0; padding-bottom: 0; margin-bottom: 0; margin-top: 0;">
+            <ui:Label text="Аудио эффекты: 100" display-tooltip-when-elided="true" name="AudioEffectsLabel" style="color: rgb(219, 219, 219); height: 20px; margin-top: 1px;" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" show-input-field="false" name="AudioEffects" focusable="true" page-size="0" low-value="-80" style="width: 97%; color: rgb(214, 214, 214); -unity-text-outline-color: rgb(0, 0, 0); white-space: nowrap; -unity-font-style: normal; -unity-text-align: upper-right; margin-top: 1px;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="AmbientGroup" style="flex-direction: column; padding-top: 0; padding-bottom: 0; margin-bottom: 0; margin-top: 0;">
+            <ui:Label text="Окружение: 100" display-tooltip-when-elided="true" name="AmbientLabel" style="color: rgb(219, 219, 219); height: 20px; margin-top: 1px;" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" show-input-field="false" name="Ambient" focusable="true" page-size="0" low-value="-80" style="width: 97%; color: rgb(214, 214, 214); -unity-text-outline-color: rgb(0, 0, 0); white-space: nowrap; -unity-font-style: normal; -unity-text-align: upper-right; margin-top: 1px;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="MusicGroup" style="flex-direction: column; padding-top: 0; padding-bottom: 0; margin-bottom: 0; margin-top: 0;">
+            <ui:Label text="Музыка: 100" display-tooltip-when-elided="true" name="MusicLabel" style="color: rgb(219, 219, 219); height: 20px; margin-top: 1px;" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" show-input-field="false" name="Music" focusable="true" page-size="0" low-value="-80" style="width: 97%; color: rgb(214, 214, 214); -unity-text-outline-color: rgb(0, 0, 0); white-space: nowrap; -unity-font-style: normal; -unity-text-align: upper-right; margin-top: 1px;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="Graphics" style="flex-direction: row; margin-top: 0; margin-bottom: 0;">
+            <ui:Label text="Графика" display-tooltip-when-elided="true" style="-unity-text-outline-color: rgb(0, 0, 0); color: rgb(202, 202, 202); height: 20px;" />
+            <ui:DropdownField index="0" choices="Низкая, Средняя, Высокая" name="Graphic" style="color: rgb(0, 0, 0); height: 35px; margin-bottom: 0;" />
+        </ui:GroupBox>
+        <ui:Button text="Применить" display-tooltip-when-elided="true" name="ApplyMain" style="margin-top: 0; margin-bottom: 0; height: 25px;" />
+        <ui:Button text="Сохраниться" display-tooltip-when-elided="true" name="SaveProgress" style="margin-top: 0; margin-bottom: 0; height: 25px;" />
+        <ui:Button text="Выход" display-tooltip-when-elided="true" name="Quit" style="justify-content: flex-start; margin-top: 0; margin-bottom: 0; height: 25px;" />
+    </ui:GroupBox>
+    <ui:GroupBox name="Keys" style="display: flex;">
+        <ui:GroupBox name="KeysMenu" style="flex-direction: row; justify-content: space-around; height: 40px;">
+            <ui:Button text="&lt;-" display-tooltip-when-elided="true" name="KeysMenuLeft" />
+            <ui:Label text="Движение" display-tooltip-when-elided="true" name="KeysMenuLabel" style="color: rgb(255, 255, 255);" />
+            <ui:Button text="-&gt;" display-tooltip-when-elided="true" name="KeysMenuRight" />
+        </ui:GroupBox>
+        <ui:GroupBox name="KeysGroup0" style="display: flex;">
+            <ui:GroupBox name="KeysForward" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Вперёд" display-tooltip-when-elided="true" name="KeysForwardLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="W" display-tooltip-when-elided="true" name="KeysBtn00" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysBackward" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Назад" display-tooltip-when-elided="true" name="KeysBackwardLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="S" display-tooltip-when-elided="true" name="KeysBtn01" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysLeft" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Влево" display-tooltip-when-elided="true" name="KeysLeftLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="A" display-tooltip-when-elided="true" name="KeysBtn02" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysRight" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Вправо" display-tooltip-when-elided="true" name="KeysRightLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="D" display-tooltip-when-elided="true" name="KeysBtn03" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="KeysGroup1" style="display: flex;">
+            <ui:GroupBox name="KeysInteract" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Взаимодействие" display-tooltip-when-elided="true" name="KeysInteractLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="E" display-tooltip-when-elided="true" name="KeysBtn10" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysSettings" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Меню" display-tooltip-when-elided="true" name="KeysSettingstLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="Esc" display-tooltip-when-elided="true" name="KeysBtn11" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysChooseHand" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Свободная рука" display-tooltip-when-elided="true" name="KeysSettingstLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="X" display-tooltip-when-elided="true" name="KeysBtn12" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="KeysGroup2" style="display: flex;">
+            <ui:GroupBox name="KeysTarget" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Прицеливание" display-tooltip-when-elided="true" name="KeysTargetLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="Mouse 1" display-tooltip-when-elided="true" name="KeysBtn20" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysFire" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Огонь" display-tooltip-when-elided="true" name="KeysFireLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="Mosue 0" display-tooltip-when-elided="true" name="KeysBtn21" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysSuper" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Способность" display-tooltip-when-elided="true" name="KeysSuperLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="F" display-tooltip-when-elided="true" name="KeysBtn22" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysChange" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Смена оружия" display-tooltip-when-elided="true" name="KeysChangeLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="Q" display-tooltip-when-elided="true" name="KeysBtn23" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysDropWeapon" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Выбросить оружие" display-tooltip-when-elided="true" name="KeysDropWeaponLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="G" display-tooltip-when-elided="true" name="KeysBtn24" />
+            </ui:GroupBox>
+            <ui:GroupBox name="KeysReloadWeapon" style="flex-direction: row; justify-content: space-between; height: 35px;">
+                <ui:Label text="Выбросить оружие" display-tooltip-when-elided="true" name="KeysReloadLabel" style="color: rgb(221, 221, 221);" />
+                <ui:Button text="G" display-tooltip-when-elided="true" name="KeysBtn25" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:GroupBox>
+    <ui:GroupBox name="Map" style="display: flex;" />
+    <ui:GroupBox name="Inventory">
+        <ui:Label display-tooltip-when-elided="true" name="InventoryText" style="flex-wrap: nowrap; color: rgb(233, 233, 233); white-space: normal;" />
+    </ui:GroupBox>
+</ui:UXML>
