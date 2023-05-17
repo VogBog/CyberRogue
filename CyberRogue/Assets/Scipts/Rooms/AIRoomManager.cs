@@ -11,7 +11,7 @@ public class AIRoomManager : AIManager
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("player") && !isActiveRoom)
+        if (other.CompareTag("player") && !isActiveRoom && !Player.isFighting)
         {
             HeadRoom.ActiveNearRooms();
             if (Enemies.Length == 0)
