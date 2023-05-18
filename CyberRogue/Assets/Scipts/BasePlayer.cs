@@ -453,9 +453,8 @@ public class BasePlayer : MonoBehaviour
     public void TookCharacteristicsCard(PlayerCharacteristicsCard card)
     {
         MaxHealth += card.Health;
-        if (curHealth > MaxHealth)
-            GetDamage(MaxHealth - curHealth);
-        if (MaxHealth <= 0) GetDamage(1);
+        curHealth = MaxHealth;
+        GetDamage(0);
         DamageMultiply += card.Damage;
         AbilityMultiply += card.Abilities;
     }
