@@ -11,10 +11,22 @@ public class Settings : MonoBehaviour
     public AudioMixer Audio;
 
     private Camera mainCamera;
+    private Camera mapCamera;
     private Vector2 invalidPosition;
     private UIDocument ui;
     private VisualElement element;
     private BasePlayer player;
+
+    private GameManager __game;
+    private GameManager Game
+    {
+        get
+        {
+            if(__game == null)
+                __game = FindObjectOfType<GameManager>();
+            return __game;
+        }
+    }
 
     //States
     #region States
@@ -42,6 +54,12 @@ public class Settings : MonoBehaviour
     private GroupBox[] KeysGroups = new GroupBox[3];
     #endregion
 
+    //Map
+    #region Map
+    private Label MapLabel;
+    private Slider MapSlider;
+    #endregion
+
     private Dictionary<string, int> qualityLevels = new Dictionary<string, int>()
     { {"Низкая", 0 }, {"Средняя", 1}, {"Высокая", 2} };
 
@@ -57,6 +75,8 @@ public class Settings : MonoBehaviour
         Audio.SetFloat("Music", AllSettings.Music);
 
         QualitySettings.SetQualityLevel(qualityLevels[GraphicField.value]);
+
+        StaticSaveData.SaveSettingsData();
     }
 
     private void UpdateMainSlider()
@@ -78,7 +98,8 @@ public class Settings : MonoBehaviour
 
     private void OnEnable()
     {
-        mainCamera = Camera.main;
+        mainCamera = Game.MainCamera;
+        mapCamera = Game.MiniMapCamera;
         ui = GetComponent<UIDocument>();
         invalidPosition = new Vector2(float.NaN, float.NaN);
         element = ui.rootVisualElement;
@@ -119,7 +140,7 @@ public class Settings : MonoBehaviour
                 Application.Quit();
             else SceneManager.LoadScene(0);
         };
-        element.Q<Button>("SaveProgress").clicked += () => FindObjectOfType<GameManager>().SaveData();
+        element.Q<Button>("SaveProgress").clicked += () => Game.SaveData();
         #endregion
 
         //Keys
@@ -165,10 +186,18 @@ public class Settings : MonoBehaviour
 
         #endregion
 
+        //Maps
+        #region Map
+        MapLabel = element.Q<Label>("MapSizeLabel");
+        MapSlider = element.Q<Slider>("MapSize");
+        #endregion
+
         ui.panelSettings.SetScreenToPanelSpaceFunction((Vector2 screenPosition) =>
         {
             if (mainCamera == null) return invalidPosition;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            mapCamera.orthographicSize = MapSlider.value;
+            MapLabel.text = $"Размер карты: {Mathf.FloorToInt(MapSlider.value)}";
 
             RaycastHit hit;
             if (!Physics.Raycast(ray, out hit, 100, uiMask))

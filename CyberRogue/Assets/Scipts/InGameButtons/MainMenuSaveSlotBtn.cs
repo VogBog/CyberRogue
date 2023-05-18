@@ -20,7 +20,7 @@ public class MainMenuSaveSlotBtn : InGameButton
 
     public override void OnClick(BasePlayer player)
     {
-        MainStaticData.SaveSlot = Slot;
+        AllSettings.SaveSlot = Slot;
         MySlotIsChoosen.SetActive(true);
         for(int i = 0; i < AllSlots.Length; i++)
         {
@@ -59,5 +59,8 @@ public class MainMenuSaveSlotBtn : InGameButton
         string line = (string)bf.Deserialize(file);
         file.Close();
         Text.text = $"Lvl: {line[0]}\n";
+
+        if (AllSettings.SaveSlot == Slot)
+            MySlotIsChoosen.SetActive(true);
     }
 }

@@ -47,7 +47,7 @@ public class ProcedureGameManager : GameManager
 
         yield return new WaitForSeconds(2);
 
-        MyDataStream reader = new MyDataStream(MainStaticData.SaveSlot, MyDataStream.MyDataStreamType.Open);
+        MyDataStream reader = new MyDataStream(AllSettings.SaveSlot, MyDataStream.MyDataStreamType.Open);
         bool isLoadData = int.Parse(reader.ReadLine()) == SceneManager.GetActiveScene().buildIndex;
         isLoadData = reader.ReadLine() != "None" && isLoadData;
         if (!isLoadData)
@@ -432,7 +432,7 @@ public class ProcedureGameManager : GameManager
 
     public override void SaveData()
     {
-        MyDataStream writer = new MyDataStream(MainStaticData.SaveSlot, MyDataStream.MyDataStreamType.Write);
+        MyDataStream writer = new MyDataStream(AllSettings.SaveSlot, MyDataStream.MyDataStreamType.Write);
         string text = SceneManager.GetActiveScene().buildIndex.ToString() + "\n";
         text += "Yes\n";
         text += $"{Player.MaxHealth} {Player.curHealth} {Player.DamageMultiply} {Player.AbilityMultiply}";

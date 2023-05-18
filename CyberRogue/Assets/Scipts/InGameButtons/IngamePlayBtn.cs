@@ -15,7 +15,7 @@ public class IngamePlayBtn : InGameButton
         {
             isPressed = true;
 
-            MyDataStream stream = new MyDataStream(MainStaticData.SaveSlot, MyDataStream.MyDataStreamType.Open);
+            MyDataStream stream = new MyDataStream(AllSettings.SaveSlot, MyDataStream.MyDataStreamType.Open);
             string line = stream.ReadLine();
             stream.Close();
 

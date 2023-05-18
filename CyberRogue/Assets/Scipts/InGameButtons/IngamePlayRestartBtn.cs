@@ -11,7 +11,7 @@ public class IngamePlayRestartBtn : IngamePlayBtn
         if(!is_Pressed)
         {
             is_Pressed = true;
-            MyDataStream stream = new MyDataStream(MainStaticData.SaveSlot, MyDataStream.MyDataStreamType.Write);
+            MyDataStream stream = new MyDataStream(AllSettings.SaveSlot, MyDataStream.MyDataStreamType.Write);
             stream.WriteLine("0");
             stream.Close();
             SceneManager.LoadScene(1);

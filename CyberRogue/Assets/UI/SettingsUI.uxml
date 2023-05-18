@@ -96,7 +96,12 @@
             </ui:GroupBox>
         </ui:GroupBox>
     </ui:GroupBox>
-    <ui:GroupBox name="Map" style="display: flex;" />
+    <ui:GroupBox name="Map" style="display: flex;">
+        <ui:GroupBox name="MapSize" style="flex-direction: column; padding-top: 0; padding-bottom: 0; margin-bottom: 0; margin-top: 0;">
+            <ui:Label text="Размер карты:" display-tooltip-when-elided="true" name="MapSizeLabel" style="color: rgb(219, 219, 219); height: 20px; margin-top: 1px;" />
+            <ui:Slider picking-mode="Ignore" value="100" high-value="300" show-input-field="false" name="MapSize" focusable="true" page-size="0" low-value="100" style="width: 97%; color: rgb(214, 214, 214); -unity-text-outline-color: rgb(0, 0, 0); white-space: nowrap; -unity-font-style: normal; -unity-text-align: upper-right; margin-top: 1px;" />
+        </ui:GroupBox>
+    </ui:GroupBox>
     <ui:GroupBox name="Inventory">
         <ui:Label display-tooltip-when-elided="true" name="InventoryText" style="flex-wrap: nowrap; color: rgb(233, 233, 233); white-space: normal;" />
     </ui:GroupBox>

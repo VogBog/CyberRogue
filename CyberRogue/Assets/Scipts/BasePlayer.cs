@@ -384,9 +384,6 @@ public class BasePlayer : MonoBehaviour
         if (!isUndead && !isShieldActivate())
         {
             curHealth -= damage;
-            HealthTxt.text = Mathf.RoundToInt(curHealth).ToString();
-            float g = curHealth / MaxHealth;
-            HealthTxt.color = new Color(1 - g, g, 0, 1);
 
             HitAudioSource.Stop();
             HitAudioSource.clip = HitSounds[Random.Range(0, HitSounds.Length)];
@@ -412,6 +409,10 @@ public class BasePlayer : MonoBehaviour
                     SetNotice("Вы погибли!");
                 }
             }
+
+            HealthTxt.text = Mathf.RoundToInt(curHealth).ToString();
+            float g = Mathf.Clamp(curHealth / MaxHealth, 0, 1);
+            HealthTxt.color = new Color(1 - g, g, 0, 1);
         }
         else
         {

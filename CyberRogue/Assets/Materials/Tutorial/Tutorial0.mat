@@ -122,7 +122,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _MainValue: 0
+    - _MainValue: 40
     - _Metallic: 0.45
     - _OcclusionStrength: 1
     - _Offset: 0

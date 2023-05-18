@@ -1,3 +1,5 @@
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public static class StaticSaveData
@@ -7,6 +9,8 @@ public static class StaticSaveData
     public static BaseWeapon[] AllWeapons;
     public static LevelRoom[] AllLevelRooms;
     public static Ability[] AllAbilities;
+
+    public static string SettingsDataPath { get; } = Application.persistentDataPath + "/SaveSlots/SettingsData.dat";
 
     public static string GetPath(int index)
     {
@@ -43,5 +47,35 @@ public static class StaticSaveData
                 return AllLevelRooms[i];
         }
         return AllLevelRooms[0];
+    }
+
+    public static void SaveSettingsData()
+    {
+        FileStream stream = File.OpenWrite(SettingsDataPath);
+        BinaryFormatter bf = new BinaryFormatter();
+        string res = $"{AllSettings.SaveSlot}\n{AllSettings.Sensivity}\n{AllSettings.SoundEffects}\n{AllSettings.Music}\n{AllSettings.Ambient}" +
+                    "\n" + QualitySettings.GetQualityLevel();
+        bf.Serialize(stream, res);
+        stream.Close();
+    }
+
+    public static void LoadSettingsData()
+    {
+        FileStream file = File.OpenRead(SettingsDataPath);
+        BinaryFormatter bf = new BinaryFormatter();
+        string[] lines = ((string)bf.Deserialize(file)).Split('\n');
+        if (int.TryParse(lines[0], out int slot))
+            AllSettings.SaveSlot = slot;
+        if (float.TryParse(lines[1], out float data))
+            AllSettings.Sensivity = data;
+        if (float.TryParse(lines[2], out data))
+            AllSettings.SoundEffects = data;
+        if (float.TryParse(lines[3], out data))
+            AllSettings.Music = data;
+        if (float.TryParse(lines[4], out data))
+            AllSettings.Ambient = data;
+        if (int.TryParse(lines[5], out slot))
+            QualitySettings.SetQualityLevel(slot);
+        file.Close();
     }
 }

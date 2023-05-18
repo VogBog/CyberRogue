@@ -23,6 +23,7 @@ public class TutorialSceneScript : GameManager
     private bool isWaitingForButton = false;
     private bool isTutorialFight = false;
     private bool isAIFight = false;
+    private bool isDoorNoticeShowed = false;
 
     protected override void AfterStart()
     {
@@ -155,6 +156,13 @@ public class TutorialSceneScript : GameManager
             isAIFight = false;
             StartCoroutine(FinishIE());
         }
+        else if(name == "Door" && !isDoorNoticeShowed)
+        {
+            isDoorNoticeShowed = true;
+            Player.SetNotice("Попробуйте открыть эту дверь");
+            Player.SetNotice($"Чтобы убрать оружие, нажмите {AllKeys.ChooseFreeHand}");
+            Player.SetNotice($"Наведитесь на ручку двери, зажмите {AllKeys.Fire} и проведите вверх");
+        }
     }
 
     IEnumerator FinishIE()
@@ -169,7 +177,7 @@ public class TutorialSceneScript : GameManager
         mat1.DOFloat(0, "_MainValue", 5);
         mat2.DOFloat(0, "_MainValue", 5);
         yield return new WaitForSeconds(5);
-        MyDataStream.OpenWriteAndClose(MainStaticData.SaveSlot, "2\nNone");
+        MyDataStream.OpenWriteAndClose(AllSettings.SaveSlot, "2\nNone");
         SceneManager.LoadScene(2);
     }
 

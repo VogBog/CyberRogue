@@ -89,11 +89,27 @@ public class MainMenuHall : MonoBehaviour
                 }
                 if (attempt > 1000) break;
             }
+
             if(attempt > 1000)
             {
                 Player.SetNotice("Что-то не даёт открыть слот сохранения, попробуйте перезагрузить компьютер.");
             }
         }
+
+        if (!File.Exists(StaticSaveData.SettingsDataPath))
+        {
+            FileStream file = File.Create(StaticSaveData.SettingsDataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            string res = $"{AllSettings.SaveSlot}\n{AllSettings.Sensivity}\n{AllSettings.SoundEffects}\n{AllSettings.Music}\n{AllSettings.Ambient}" +
+                "\n" + QualitySettings.GetQualityLevel();
+            bf.Serialize(file, res);
+            file.Close();
+        }
+        else
+        {
+            StaticSaveData.LoadSettingsData();
+        }
+
         isEnd = true;
     }
 }

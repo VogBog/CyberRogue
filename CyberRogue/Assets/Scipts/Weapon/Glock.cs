@@ -266,6 +266,15 @@ public class Glock : BaseWeapon
     public override void LoadSaveData(MyDataStream reader)
     {
         string[] splittedData = reader.ReadLine().Split();
+        StartCoroutine(AfterLoadSaveData(splittedData));
+    }
+
+    IEnumerator AfterLoadSaveData(string[] splittedData)
+    {
+        yield return null;
+        yield return null;
+        yield return null;
+
         if (int.TryParse(splittedData[0], out int num))
             curAmmo = num;
         else curAmmo = MaxAmmo;
