@@ -31,7 +31,6 @@ public class Puturidze : BaseRifleEnemy
 
     protected override void Death()
     {
-        Debug.Log("Game over!");
         Game.BossIsDead();
         base.Death();
     }

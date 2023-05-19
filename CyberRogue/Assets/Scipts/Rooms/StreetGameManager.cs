@@ -7,7 +7,6 @@ public class StreetGameManager : ProcedureGameManager
 {
     public StreetSkyBoxHome[] SkyBoxes;
     public Transform SkyBoxHomesParent;
-    public AudioClip WinSound;
     public AudioSource AmbientAudioSource;
 
     protected override IEnumerator AfterBaseGenerate(List<LevelRoom> rooms)
@@ -52,9 +51,6 @@ public class StreetGameManager : ProcedureGameManager
 
     IEnumerator BossIsDeadIE()
     {
-        Player.SetNotice("онаедю!");
-        yield return null;
-        Player.PlayMusic(WinSound, false);
         yield return new WaitForSeconds(10);
         SceneManager.LoadScene(3);
     }

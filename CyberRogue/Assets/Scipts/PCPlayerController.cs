@@ -83,6 +83,9 @@ public class PCPlayerController : PlayerController
         moveVector = moveVector * player.CurSpeed + velocity;
         controller.Move(moveVector * Time.deltaTime);
 
+        player.SettingsGO.transform.position = player.SettingsPos.position;
+        player.SettingsGO.transform.rotation = player.SettingsPos.rotation;
+
         //Rotation
         if (!isRotateLocked)
         {

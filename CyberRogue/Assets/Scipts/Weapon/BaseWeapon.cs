@@ -1,4 +1,3 @@
-using System.IO;
 using UnityEngine;
 
 public abstract class BaseWeapon : PickableItem
@@ -40,6 +39,8 @@ public abstract class BaseWeapon : PickableItem
 
     protected override void PickItem(BasePlayer player)
     {
+        if (PickGO)
+            PickGO.SetActive(false);
         if (player.CurrentWeapon && player.CurrentWeapon.ItemName == ItemName)
         {
             WeaponAmmo am = Instantiate(MyAmmoPrefab, transform.position, Quaternion.identity, null);

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject PCCursor, PCChooseCursor;
     public Light SunLight;
     public Transform PlayerDeadPosition;
+    public AudioClip WinSound;
 
     [HideInInspector] public bool IsAutoSafe = false;
 
@@ -142,4 +143,9 @@ public class GameManager : MonoBehaviour
     public virtual void LoadData() { }
 
     public virtual void BossIsDead() { }
+
+    public virtual void EndWave()
+    {
+        Player.PlayMusic(WinSound, false);
+    }
 }

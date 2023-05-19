@@ -2,14 +2,13 @@ using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuHall : MonoBehaviour
 {
     [HideInInspector] public bool isEnd = false;
     public BasePlayer Player;
 
-    private string currentVersion = "1.0";
+    private string currentVersion = "1.1";
 
     private void Start()
     {

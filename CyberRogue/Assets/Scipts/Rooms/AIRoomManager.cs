@@ -38,7 +38,7 @@ public class AIRoomManager : AIManager
     protected override void EndWave()
     {
         HeadRoom.StartEndWave(false);
-        Player.StopMusic();
+        game.EndWave();
         base.EndWave();
         if (game.IsAutoSafe)
             game.SaveData();

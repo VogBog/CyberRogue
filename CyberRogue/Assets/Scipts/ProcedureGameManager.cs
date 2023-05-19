@@ -26,7 +26,7 @@ public class ProcedureGameManager : GameManager
     public NearPlayerSpot[] NearPlayerSpots;
     public NavMeshSurface Surface;
 
-    private bool isStartRoomFree = true;
+    private bool isStartRoomFree = true, isFirstWave = true;
     private LevelRoom[] allExistedRooms;
 
     protected override void AfterStart()
@@ -435,6 +435,7 @@ public class ProcedureGameManager : GameManager
         MyDataStream writer = new MyDataStream(AllSettings.SaveSlot, MyDataStream.MyDataStreamType.Write);
         string text = SceneManager.GetActiveScene().buildIndex.ToString() + "\n";
         text += "Yes\n";
+        text += isFirstWave ? "No\n" : "Yes\n";
         text += $"{Player.MaxHealth} {Player.curHealth} {Player.DamageMultiply} {Player.AbilityMultiply}";
         writer.WriteLine(text);
         writer.WriteLine(Player.GetWeaponSaveData());
@@ -449,10 +450,12 @@ public class ProcedureGameManager : GameManager
             writer.WriteLine(allExistedRooms[i].GetSaveData());
         }
         writer.Close();
+        Player.SetNotice("¬ы сохранились.");
     }
 
     private List<LevelRoom> ReadDataAndSetRooms(MyDataStream reader)
     {
+        isFirstWave = reader.ReadLine() == "No";
         List<LevelRoom> result = new List<LevelRoom>();
         Player.ReadAndApplyData(reader);
         int count = 0;
@@ -475,5 +478,17 @@ public class ProcedureGameManager : GameManager
         for (int i = 0; i < result.Count; i++)
             result[i].ApplyConnectedRooms(result);
         return result;
+    }
+
+    public override void EndWave()
+    {
+        base.EndWave();
+        if(isFirstWave)
+        {
+            isFirstWave = false;
+            Player.SetNotice(" ейсы, выпавшие после окончани€ бо€, открываютс€ так же, как двери");
+            Player.SetNotice("“акже можно открывать мусорные баки, из которых может выпасть лут.");
+            Player.SetNotice("— рычагами можно взаимодействовать так же, как и с дверьми.");
+        }
     }
 }

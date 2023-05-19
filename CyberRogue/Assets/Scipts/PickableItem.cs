@@ -39,6 +39,22 @@ public abstract class PickableItem : InGameButton
         }
     }
 
+    public void QuickPick(BasePlayer player)
+    {
+        this.player = player;
+        if(isDroped && canPick(player))
+        {
+            isDroped = false;
+            if (PickMeParticle)
+                PickMeParticle.SetActive(false);
+            if (PickGO)
+                PickGO.SetActive(false);
+            SetBodyParameters(true);
+            isPickedAlready = true;
+            PickItem(player);
+        }
+    }
+
     public override void OnUnchoosen()
     {
         if(PickGO != null)

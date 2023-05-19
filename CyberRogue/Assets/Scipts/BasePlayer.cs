@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +9,7 @@ using UnityEngine;
 public class BasePlayer : MonoBehaviour
 {
     public CharacterController CharacterController;
-    public Transform PhysiscSphere;
+    public Transform PhysiscSphere, SettingsPos;
     public Transform CameraPos;
     public float MaxSpeed;
     public float Gravity;
@@ -87,6 +86,7 @@ public class BasePlayer : MonoBehaviour
     {
         game = FindObjectOfType<GameManager>();
 
+        SettingsGO.transform.SetParent(null);
         MainCamera = game.MainCamera.transform;
         MainCamera.position = CameraPos.position;
         controller = transform.AddComponent<PCPlayerController>();
@@ -231,15 +231,16 @@ public class BasePlayer : MonoBehaviour
         if(currentWeaponIndex == weapons.Length - 1)
         {
             currentWeaponIndex = 0;
-            for(int i = 0; i < weapons.Length - 1; i++)
+        }
+        for (int i = 0; i < weapons.Length - 1; i++)
+        {
+            if (weapons[i] == null)
             {
-                if (weapons[i] == null)
-                {
-                    currentWeaponIndex = i;
-                    break;
-                }
+                currentWeaponIndex = i;
+                break;
             }
         }
+
         if (weapons[currentWeaponIndex])
             DropCurrentWeapon();
         weapons[currentWeaponIndex] = weapon;
@@ -518,10 +519,13 @@ public class BasePlayer : MonoBehaviour
         if (float.TryParse(data[3], out res))
             AbilityMultiply = res;
 
+        HealthTxt.text = Mathf.FloorToInt(curHealth).ToString();
+
         line = reader.ReadLine();
         if (!int.TryParse(line, out int count))
             count = 3;
         weapons = new BaseWeapon[count];
+        currentWeaponIndex = 0;
         for(int i = 0; i <= count; i++)
         {
             line = reader.ReadLine();
@@ -536,10 +540,14 @@ public class BasePlayer : MonoBehaviour
             else
                 wpn = Instantiate(StaticSaveData.GetWeaponByName(line), transform.position, Quaternion.identity, null);
             wpn.LoadSaveData(reader);
-            wpn.OnClick(this);
-            SwapWeaponPC();
+            wpn.QuickPick(this);
+            CurrentWeapon.transform.SetParent(WeaponPoses[currentWeaponIndex].transform);
+            CurrentWeapon.transform.localRotation = new Quaternion();
+            CurrentWeapon.transform.localPosition = Vector3.zero;
+            currentWeaponIndex = (currentWeaponIndex + 1) % (weapons.Length - 1);
             reader.ReadLine();
         }
+        ChooseFreeHandForPC();
 
         if (!int.TryParse(reader.ReadLine(), out count))
             count = 5;

@@ -26,6 +26,11 @@ public class HandMoveObject : InGameButton
 
     private void Start()
     {
+        UpdatePoses();
+    }
+
+    public void UpdatePoses()
+    {
         startPosCursorVec = StartPosCursor.position;
         endPosCursorVec = EndPosCursor.position;
         startPosObjectVec = StartPosObject.position;

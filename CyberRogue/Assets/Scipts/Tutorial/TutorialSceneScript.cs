@@ -19,6 +19,7 @@ public class TutorialSceneScript : GameManager
     public GameObject GlockAmmoPrefab, SkyBoxGO;
     public AudioSource StartSource;
     public AIManager AI;
+    public HandMoveObject Door;
 
     private bool isWaitingForButton = false;
     private bool isTutorialFight = false;
@@ -207,6 +208,7 @@ public class TutorialSceneScript : GameManager
         else if(isOK && isAIFight)
         {
             FightWalls[2].transform.DOMoveY(-10, 5);
+            Door.UpdatePoses();
         }
     }
 

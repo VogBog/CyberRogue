@@ -90,7 +90,6 @@ public class Glock : BaseWeapon
     protected override void AfterStart()
     {
         base.AfterStart();
-        AmmoTxt.gameObject.SetActive(false);
         lineTimes = new float[LineRenderers.Length];
         startColor = LineRenderers[0].startColor;
         endColor = LineRenderers[0].endColor;
