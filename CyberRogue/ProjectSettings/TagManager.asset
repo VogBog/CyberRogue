@@ -23,7 +23,7 @@ TagManager:
   - DestroyableByWeapon
   - Text
   - NonVisibleInGameItems
-  - 
+  - NotWalkable
   - 
   - 
   - 

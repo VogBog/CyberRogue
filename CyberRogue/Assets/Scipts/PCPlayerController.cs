@@ -180,22 +180,24 @@ public class PCPlayerController : PlayerController
                 player.LeftHandAnimator.SetInteger("State", 0);
                 player.CurrentWeapon.ReloadAnimForPC(player.LeftHand.transform, player.RightHand.transform, player.AmmoPose, this);
             }
-            else if(!player.CurrentWeapon && player.ChoosenInGameButton)
+            else if (!player.CurrentWeapon && player.ChoosenInGameButton)
             {
                 if (Input.GetKey(AllKeys.Fire))
                     player.ChoosenInGameButton.OnDraging(buttonHit.point);
                 else player.ChoosenInGameButton.StopDraging();
             }
-            else if(Input.GetKeyDown(AllKeys.ChooseFreeHand))
+            else if (Input.GetKeyDown(AllKeys.ChooseFreeHand))
             {
                 player.ChooseFreeHandForPC();
             }
-            else if(Input.GetKeyDown(KeyCode.F1))
+            else if (Input.GetKeyDown(KeyCode.F1))
             {
                 game.IsAutoSafe = !game.IsAutoSafe;
                 string notice = game.IsAutoSafe ? "Автосохранения включены" : "Автосохранения отключены";
                 player.SetNotice(notice);
             }
+            else if (Input.GetKeyDown(KeyCode.O))
+                player.TeleportPlayerTo(new Vector3(8.5f, 3, -2.5f));
         }
     }
 

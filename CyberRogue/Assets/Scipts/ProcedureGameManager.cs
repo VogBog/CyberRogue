@@ -26,6 +26,8 @@ public class ProcedureGameManager : GameManager
     public NearPlayerSpot[] NearPlayerSpots;
     public NavMeshSurface Surface;
 
+    private int LastRoom = -1;
+
     private bool isStartRoomFree = true, isFirstWave = true;
     private LevelRoom[] allExistedRooms;
 
@@ -221,8 +223,16 @@ public class ProcedureGameManager : GameManager
 
         LoadSlider.value = 1;
 
-        rooms[0].ActiveNearRooms();
+        if (LastRoom != -1)
+        {
+            Player.TeleportPlayerTo(GetFreePosInLastRoom(rooms[LastRoom]));
+            rooms[LastRoom].ActiveNearRooms();
+        }
+        else
+            rooms[0].ActiveNearRooms();
 
+        yield return null;
+        yield return null;
         yield return null;
 
         GenerateDone();
@@ -436,6 +446,7 @@ public class ProcedureGameManager : GameManager
         string text = SceneManager.GetActiveScene().buildIndex.ToString() + "\n";
         text += "Yes\n";
         text += isFirstWave ? "No\n" : "Yes\n";
+        text += $"{LastRoom}\n";
         text += $"{Player.MaxHealth} {Player.curHealth} {Player.DamageMultiply} {Player.AbilityMultiply}";
         writer.WriteLine(text);
         writer.WriteLine(Player.GetWeaponSaveData());
@@ -453,9 +464,21 @@ public class ProcedureGameManager : GameManager
         Player.SetNotice("Вы сохранились.");
     }
 
+    private Vector3 GetFreePosInLastRoom(LevelRoom room)
+    {
+        for(int i = 0; i < room.AI.EnemiesSpawnPoints.Length; i++)
+        {
+            if (room.AI.EnemiesSpawnPoints[i].IsFree)
+                return room.AI.EnemiesSpawnPoints[i].transform.position;
+        }
+        return new Vector3(8.5f, 3, -2.5f);
+    }
+
     private List<LevelRoom> ReadDataAndSetRooms(MyDataStream reader)
     {
         isFirstWave = reader.ReadLine() == "No";
+        if (!int.TryParse(reader.ReadLine(), out LastRoom))
+            LastRoom = -1;
         List<LevelRoom> result = new List<LevelRoom>();
         Player.ReadAndApplyData(reader);
         int count = 0;
@@ -480,9 +503,22 @@ public class ProcedureGameManager : GameManager
         return result;
     }
 
-    public override void EndWave()
+    public void SetLastRoom(LevelRoom room)
     {
-        base.EndWave();
+        for(int i = 0; i < allExistedRooms.Length; i++)
+        {
+            if (allExistedRooms[i] == room)
+            {
+                LastRoom = i;
+                break;
+            }
+        }
+    }
+
+    public override void EndWave(LevelRoom whatRoom)
+    {
+        base.EndWave(whatRoom);
+        SetLastRoom(whatRoom);
         if(isFirstWave)
         {
             isFirstWave = false;

@@ -161,6 +161,7 @@ MonoBehaviour:
   PCChooseCursor: {fileID: 1961122715}
   SunLight: {fileID: 814402457}
   PlayerDeadPosition: {fileID: 569192993}
+  WinSound: {fileID: 8300000, guid: e05544ab79e0fa34582a1133c6720484, type: 3}
   IsAutoSafe: 0
   LoadSlider: {fileID: 763229081}
   BlackScreen: {fileID: 2091599346}
@@ -207,7 +208,6 @@ MonoBehaviour:
   - {fileID: 6070103219418955622, guid: cb617fc420e4fc9408151908974d4046, type: 3}
   - {fileID: 4548240683202755986, guid: 2be76d52aed1f264ba148d2be919cb0e, type: 3}
   SkyBoxHomesParent: {fileID: 1198924036}
-  WinSound: {fileID: 8300000, guid: e05544ab79e0fa34582a1133c6720484, type: 3}
   AmbientAudioSource: {fileID: 731070604}
 --- !u!4 &2374552
 Transform:
@@ -1251,7 +1251,7 @@ PrefabInstance:
     - target: {fileID: 8311804426787902986, guid: 9fbee3d81ed1b4f4782f1a3f0113af7f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.34
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 8311804426787902986, guid: 9fbee3d81ed1b4f4782f1a3f0113af7f,
         type: 3}
@@ -1791,7 +1791,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1

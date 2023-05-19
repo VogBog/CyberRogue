@@ -1193,7 +1193,7 @@ MonoBehaviour:
   MaxHealth: 100
   GravityMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 16448
   ChooseInGameUIMask:
     serializedVersion: 2
     m_Bits: 9280

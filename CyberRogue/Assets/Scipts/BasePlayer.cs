@@ -423,6 +423,20 @@ public class BasePlayer : MonoBehaviour
         }
     }
 
+    public void TeleportPlayerTo(Vector3 pos)
+    {
+        StartCoroutine(TeleportPlayerIE(pos));
+    }
+
+    IEnumerator TeleportPlayerIE(Vector3 pos)
+    {
+        CharacterController.enabled = false;
+        yield return null;
+        transform.position = pos;
+        yield return null;
+        CharacterController.enabled = true;
+    }
+
     public void Heal(float heal)
     {
         curHealth = Mathf.Clamp(curHealth + heal, 0, MaxHealth);

@@ -99,14 +99,17 @@ public class AIManager : MonoBehaviour
             ExtraEndWave();
     }
 
-    public void ExtraEndWave()
+    private void ExtraEndWave()
     {
         if(Player.isFighting)
         {
             for(int i = 0; i < AllEnemies.Count; i++)
             {
                 if (AllEnemies[i] != null)
+                {
                     AllEnemies[i].Hitted(1000, null);
+                    break;
+                }
             }
         }
     }

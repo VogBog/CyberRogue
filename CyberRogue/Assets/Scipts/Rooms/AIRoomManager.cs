@@ -38,7 +38,7 @@ public class AIRoomManager : AIManager
     protected override void EndWave()
     {
         HeadRoom.StartEndWave(false);
-        game.EndWave();
+        game.EndWave(HeadRoom);
         base.EndWave();
         if (game.IsAutoSafe)
             game.SaveData();

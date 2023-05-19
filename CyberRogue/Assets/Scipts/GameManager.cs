@@ -127,8 +127,7 @@ public class GameManager : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-        Player.CharacterController.enabled = false;
-        Player.transform.position = PlayerDeadPosition.position;
+        Player.TeleportPlayerTo(PlayerDeadPosition.position);
         StartCoroutine(PlayerDeadIE());
     }
 
@@ -144,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     public virtual void BossIsDead() { }
 
-    public virtual void EndWave()
+    public virtual void EndWave(LevelRoom whatRoom)
     {
         Player.PlayMusic(WinSound, false);
     }

@@ -8,7 +8,7 @@ public class MainMenuHall : MonoBehaviour
     [HideInInspector] public bool isEnd = false;
     public BasePlayer Player;
 
-    private string currentVersion = "1.1";
+    private string currentVersion = "1.2";
 
     private void Start()
     {
@@ -31,67 +31,54 @@ public class MainMenuHall : MonoBehaviour
         int attempt = 0;
         yield return null;
 
-        if (!isFileExists())
+        bool isOld = false;
+        if (!Directory.Exists(Application.persistentDataPath + "/SaveSlots"))
+            Directory.CreateDirectory(Application.persistentDataPath + "/SaveSlots");
+        string dataPath = Application.persistentDataPath + "/SaveSlots/Version.dat";
+        if (!File.Exists(dataPath))
         {
-            bool isOld = false;
-            if (!Directory.Exists(Application.persistentDataPath + "/SaveSlots"))
-                Directory.CreateDirectory(Application.persistentDataPath + "/SaveSlots");
-            string dataPath = Application.persistentDataPath + "/SaveSlots/Version.dat";
-            if (!File.Exists(dataPath))
+            FileStream file = File.Create(dataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(file, currentVersion);
+            file.Close();
+        }
+        else
+        {
+            FileStream file = File.OpenRead(dataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            string line = (string)bf.Deserialize(file);
+            file.Close();
+            if (line != currentVersion)
             {
-                FileStream file = File.Create(dataPath);
-                BinaryFormatter bf = new BinaryFormatter();
+                Player.SetNotice("Вы используете старые файлы сохранения. Они будут удалены.");
+                file = File.OpenWrite(dataPath);
                 bf.Serialize(file, currentVersion);
                 file.Close();
+                isOld = true;
             }
-            else
-            {
-                FileStream file = File.OpenRead(dataPath);
-                BinaryFormatter bf = new BinaryFormatter();
-                string line = (string)bf.Deserialize(file);
-                file.Close();
-                if(line != currentVersion)
-                {
-                    Player.SetNotice("Вы используете старые файлы сохранения. Они будут удалены.");
-                    file = File.OpenWrite(dataPath);
-                    bf.Serialize(file, currentVersion);
-                    file.Close();
-                    isOld = true;
-                }
-            }
+        }
+
+        if (!isFileExists() || isOld)
+        {
 
             for (int i = 1; i < 5; i++)
             {
                 yield return null;
                 string path = StaticSaveData.GetPath(i);
-                try
+                if (!File.Exists(path))
                 {
-                    if (!File.Exists(path))
-                    {
-                        FileStream file = File.Create(path);
-                        BinaryFormatter bf = new BinaryFormatter();
-                        bf.Serialize(file, "0");
-                        file.Close();
-                    }
-                    else if(isOld)
-                    {
-                        FileStream file = File.OpenWrite(path);
-                        BinaryFormatter bf = new BinaryFormatter();
-                        bf.Serialize(file, "0");
-                        file.Close();
-                    }
+                    FileStream file = File.Create(path);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(file, "0");
+                    file.Close();
                 }
-                catch
+                else if (isOld)
                 {
-                    i--;
-                    attempt++;
+                    FileStream file = File.OpenWrite(path);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(file, "0");
+                    file.Close();
                 }
-                if (attempt > 1000) break;
-            }
-
-            if(attempt > 1000)
-            {
-                Player.SetNotice("Что-то не даёт открыть слот сохранения, попробуйте перезагрузить компьютер.");
             }
         }
 
