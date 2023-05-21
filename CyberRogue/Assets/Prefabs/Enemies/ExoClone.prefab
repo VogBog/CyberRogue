@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c421d90a232c9a4e96fc8221fd6a884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageMultiply: 1
+  DamageMultiply: 1.6
   HeadObject: {fileID: 267033546126094576}
   DamageTxt: {fileID: 4956840587553752730}
   Clip:

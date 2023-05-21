@@ -31,6 +31,10 @@ public class Puturidze : BaseRifleEnemy
 
     protected override void Death()
     {
+        PuturidzeElectroMob[] mobs = FindObjectsOfType<PuturidzeElectroMob>();
+        for (int i = 0; i < mobs.Length; i++)
+            Destroy(mobs[i].gameObject);
+
         Game.BossIsDead();
         base.Death();
     }

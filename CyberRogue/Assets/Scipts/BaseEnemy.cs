@@ -47,8 +47,11 @@ public class BaseEnemy : DestroyableByWeapon
         allSpots = spots;
         isFighting = true;
         curAmmo = MaxAmmo;
-        lineStartColor = BulletLines[0].startColor;
-        lineEndColor = BulletLines[0].endColor;
+        if (BulletLines[0].startColor.a > 0)
+        {
+            lineStartColor = BulletLines[0].startColor;
+            lineEndColor = BulletLines[0].endColor;
+        }
         fireLinesCor = new Coroutine[BulletLines.Length];
         for (int i = 0; i < BulletLines.Length; i++)
         {

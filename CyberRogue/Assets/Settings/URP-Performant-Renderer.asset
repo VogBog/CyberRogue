@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: Text
-    Event: 300
+    Event: 600
     filterSettings:
       RenderQueueType: 1
       LayerMask:
@@ -162,7 +162,7 @@ MonoBehaviour:
     m_Bits: 9079
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 28663
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
