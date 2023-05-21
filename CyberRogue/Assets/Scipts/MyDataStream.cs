@@ -2,56 +2,62 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class MyDataStream
+public class MyDataStream //Вот этот код единственный нормальный, пожалуйста, оцените хотя бы его
 {
     public enum MyDataStreamType { Open, Write }
 
-    private List<string> allLines;
-    private FileStream openedFile;
-    private int curIndex = 0;
-    private MyDataStreamType type;
-    private bool isClosed = false;
+    private List<string> _allLines;
+    private FileStream _openedFile;
+    private int _curIndex = 0;
+    private MyDataStreamType _type;
+    private bool _isClosed = false;
 
     public MyDataStream(int SlotIndex, MyDataStreamType Type)
     {
+        SetData(Type, SlotIndex);
+    }
+
+    private void SetData(MyDataStreamType Type, int SlotIndex)
+    {
         BinaryFormatter bf = new BinaryFormatter();
         string path = StaticSaveData.GetPath(SlotIndex);
-        if(Type == MyDataStreamType.Write)
+
+        if (Type == MyDataStreamType.Write)
         {
-            openedFile = File.OpenWrite(path);
-            allLines = new List<string>();
+            _openedFile = File.OpenWrite(path);
+            _allLines = new List<string>();
         }
         else
         {
-            openedFile = File.OpenRead(path);
-            allLines = new List<string>(((string)bf.Deserialize(openedFile)).Split('\n'));
-            openedFile.Close();
+            _openedFile = File.OpenRead(path);
+            _allLines = new List<string>(((string)bf.Deserialize(_openedFile)).Split('\n'));
+            _openedFile.Close();
         }
-        type = Type;
+        _type = Type;
     }
 
     public void WriteLine(string line)
     {
-        if(type == MyDataStreamType.Write && !isClosed)
-            allLines.Add(line);
+        if(_type == MyDataStreamType.Write && !_isClosed)
+            _allLines.Add(line);
     }
 
     public void WriteLine(int num)
     {
-        if (type == MyDataStreamType.Write && !isClosed)
-            allLines.Add(num.ToString());
+        if (_type == MyDataStreamType.Write && !_isClosed)
+            _allLines.Add(num.ToString());
     }
 
     public void WriteLine(float num)
     {
-        if (type == MyDataStreamType.Write && !isClosed)
-            allLines.Add(num.ToString());
+        if (_type == MyDataStreamType.Write && !_isClosed)
+            _allLines.Add(num.ToString());
     }
 
     public void WriteLineObj(object obj)
     {
-        if(type == MyDataStreamType.Write && !isClosed)
-            allLines.Add(obj.ToString());
+        if(_type == MyDataStreamType.Write && !_isClosed)
+            _allLines.Add(obj.ToString());
     }
 
     public static void OpenWriteAndClose(int index, string lines)
@@ -65,10 +71,10 @@ public class MyDataStream
 
     public string ReadLine()
     {
-        if(type == MyDataStreamType.Open && curIndex < allLines.Count && !isClosed)
+        if(_type == MyDataStreamType.Open && _curIndex < _allLines.Count && !_isClosed)
         {
-            string res = allLines[curIndex];
-            curIndex++;
+            string res = _allLines[_curIndex];
+            _curIndex++;
             return res;
         }
         return "";
@@ -76,19 +82,19 @@ public class MyDataStream
 
     public void Close()
     {
-        if(type == MyDataStreamType.Write && !isClosed)
+        if(_type == MyDataStreamType.Write && !_isClosed)
         {
             string res = "";
-            for(int i = 0; i < allLines.Count; i++)
+            for(int i = 0; i < _allLines.Count; i++)
             {
-                res += allLines[i];
-                if (i < allLines.Count - 1)
+                res += _allLines[i];
+                if (i < _allLines.Count - 1)
                     res += "\n";
             }
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(openedFile, res);
-            openedFile.Close();
+            bf.Serialize(_openedFile, res);
+            _openedFile.Close();
         }
-        isClosed = true;
+        _isClosed = true;
     }
 }
