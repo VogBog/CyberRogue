@@ -402,7 +402,8 @@ public class ProcedureGameManager : GameManager
         if (thing is BaseEnemy enemy)
         {
             localAIManager.OneEnemyDied(enemy);
-            Player.EnemyKilled();
+            if(!enemy.IsNotRealEnemy)
+                Player.EnemyKilled();
         }
         else if (thing is ExplosionBarrel)
         {

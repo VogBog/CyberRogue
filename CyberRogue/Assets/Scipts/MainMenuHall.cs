@@ -28,7 +28,6 @@ public class MainMenuHall : MonoBehaviour
 
     IEnumerator TryFile()
     {
-        int attempt = 0;
         yield return null;
 
         bool isOld = false;

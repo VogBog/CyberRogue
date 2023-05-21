@@ -2833,6 +2833,10 @@ MonoBehaviour:
     Cost: 5
   - Item: {fileID: 8841470650652111889, guid: 498139962b6eab74a9b2775fe5bd9a30, type: 3}
     Cost: 5
+  - Item: {fileID: 6610567274357656426, guid: cb2fbdd0f9c524f4780f43960936633a, type: 3}
+    Cost: 8
+  - Item: {fileID: 8841470650652111889, guid: b62087d488307eb4cb1729262968dc30, type: 3}
+    Cost: 5
 --- !u!65 &8272870510400160157
 BoxCollider:
   m_ObjectHideFlags: 0

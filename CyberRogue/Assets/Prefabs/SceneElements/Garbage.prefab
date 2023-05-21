@@ -487,7 +487,7 @@ MonoBehaviour:
   StartOffset: 0.3
   EndOffset: 0.6
   MinusSinus: 0.08
-  Chance: 80
+  Chance: 40
   SpawnTransformTrajectory:
   - {fileID: 6705974222903378704}
   - {fileID: 6705974224115068036}
@@ -496,6 +496,7 @@ MonoBehaviour:
   SpawnObjects:
   - {fileID: 9135625773269169996, guid: 4541606e9a8e37a4da26aae1b302139c, type: 3}
   - {fileID: 2757482680810737724, guid: faa01c892c5b7e44aa11380090e0e648, type: 3}
+  - {fileID: 9135625773269169996, guid: 4050ca7825ec2e9459472e3d60470df5, type: 3}
 --- !u!1 &8285214313453316643
 GameObject:
   m_ObjectHideFlags: 0

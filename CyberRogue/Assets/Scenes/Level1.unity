@@ -1427,6 +1427,7 @@ MonoBehaviour:
   - {fileID: 6610567274357656426, guid: 2aac144152e98fd41a343bedb44a80cc, type: 3}
   - {fileID: 6610567274357656426, guid: 26e25b4ff034c7744a3746abe2a8a551, type: 3}
   - {fileID: 6610567274357656426, guid: e59fda7655f638b4da55653463735b89, type: 3}
+  - {fileID: 6610567274357656426, guid: cb2fbdd0f9c524f4780f43960936633a, type: 3}
   AllLevelRooms:
   - {fileID: 1487113816549352956, guid: c5de0b1b8a07d8244b4ab348951930e7, type: 3}
   - {fileID: 1487113816549352956, guid: 4c77c74f2855d05428164f4d8b37203b, type: 3}
@@ -1447,6 +1448,7 @@ MonoBehaviour:
   - {fileID: 8841470650652111889, guid: 97103a79eae93e84187e981a0f6dfb5f, type: 3}
   - {fileID: 8841470650652111889, guid: 056d7b5fe4d5adf498c4e19201dd38a2, type: 3}
   - {fileID: 8841470650652111889, guid: 498139962b6eab74a9b2775fe5bd9a30, type: 3}
+  Mixer: {fileID: 24100000, guid: 7a096051e7af9304781c37ff037351ff, type: 2}
 --- !u!4 &783861116
 Transform:
   m_ObjectHideFlags: 0

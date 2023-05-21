@@ -377,6 +377,9 @@ public class BasePlayer : MonoBehaviour
 
     private bool isShieldActivate()
     {
+        if (HasThisAbility(Ability.AbilityType.ShotgunShield) && CurrentWeapon && CurrentWeapon.IsShotgunShieldActivate() &&
+            Random.Range(0, 100) <= 20 + AbilityMultiply * 10)
+            return true;
         return HasThisAbility(Ability.AbilityType.Shield) && Random.Range(0, 100) <= AbilityMultiply * 10;
     }
 

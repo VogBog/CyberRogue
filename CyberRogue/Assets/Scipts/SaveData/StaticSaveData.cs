@@ -1,6 +1,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public static class StaticSaveData
 {
@@ -9,6 +10,7 @@ public static class StaticSaveData
     public static BaseWeapon[] AllWeapons;
     public static LevelRoom[] AllLevelRooms;
     public static Ability[] AllAbilities;
+    public static AudioMixer Mixer;
 
     public static string SettingsDataPath { get; } = Application.persistentDataPath + "/SaveSlots/SettingsData.dat";
 
@@ -76,6 +78,11 @@ public static class StaticSaveData
             AllSettings.Ambient = data;
         if (int.TryParse(lines[5], out slot))
             QualitySettings.SetQualityLevel(slot);
+
+        Mixer.SetFloat("Effects", AllSettings.SoundEffects);
+        Mixer.SetFloat("Music", AllSettings.Music);
+        Mixer.SetFloat("Ambient", AllSettings.Ambient);
+
         file.Close();
     }
 }

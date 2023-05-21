@@ -55,9 +55,34 @@ public class AIManager : MonoBehaviour
         for(int i = 0; i < Enemies.Length; i++)
         {
             if (AllAttackers.Contains(Enemies[i]))
-                Enemies[i].StartWave(spots.ToArray(), NearPlayerSpots, true, Player);
-            else Enemies[i].StartWave(spots.ToArray(), NearPlayerSpots, false, Player);
+                StartCoroutine(EnemyStartWaveIE(Enemies[i], spots.ToArray(), NearPlayerSpots, true, Player, i));
+            StartCoroutine(EnemyStartWaveIE(Enemies[i], spots.ToArray(), NearPlayerSpots, false, Player, i));
         }
+    }
+
+    IEnumerator EnemyStartWaveIE(BaseEnemy enemy, Transform[] spots, NearPlayerSpot[] nearPlayer, bool isAttacker, BasePlayer player, int index)
+    {
+        for(int i = 0; i < (index - 1) * 3; i++)
+            yield return null;
+        enemy.StartWave(spots, nearPlayer, isAttacker, player);
+    }
+
+    public void AddNewEnemy(BaseEnemy newEnemy, Vector3 position)
+    {
+        BaseEnemy enemy = Instantiate(newEnemy, position, Quaternion.identity, null);
+        enemy.Agent.enabled = true;
+
+        List<Transform> spots = new List<Transform>();
+        for (int i = 0; i < SniperSpots.Length; i++)
+        {
+            if (SniperSpots[i].IsFree)
+                spots.Add(SniperSpots[i].transform);
+        }
+
+        AllEnemies.Add(enemy);
+        if (enemy.Type == BaseEnemy.EnemyType.Attacker)
+            AllAttackers.Add(enemy);
+        enemy.StartWave(spots.ToArray(), NearPlayerSpots, enemy.Type == BaseEnemy.EnemyType.Attacker, Player);
     }
 
     public void OneEnemyDied(BaseEnemy enemy)

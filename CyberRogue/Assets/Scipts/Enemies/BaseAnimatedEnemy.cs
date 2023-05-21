@@ -97,17 +97,23 @@ public class BaseAnimatedEnemy : BaseEnemy
 
     protected override void Death()
     {
-        Vector3 pos = KillTxt.transform.position;
-        KillTxt.transform.SetParent(null);
-        KillTxt.gameObject.SetActive(true);
-        KillTxt.transform.position = pos;
-        KillTxt.Activate();
-        if(Random.Range(0, 100) <= LootChance && Loot.Length > 0)
+        if (!IsDead)
         {
-            Instantiate(Loot[Random.Range(0, Loot.Length)], transform.position, Quaternion.identity, null);
+            if (KillTxt)
+            {
+                Vector3 pos = KillTxt.transform.position;
+                KillTxt.transform.SetParent(null);
+                KillTxt.gameObject.SetActive(true);
+                KillTxt.transform.position = pos;
+                KillTxt.Activate();
+            }
+            if (Random.Range(0, 100) <= LootChance && Loot.Length > 0)
+            {
+                Instantiate(Loot[Random.Range(0, Loot.Length)], transform.position, Quaternion.identity, null);
+            }
+            if (player.HasThisAbility(Ability.AbilityType.HealAfterKill))
+                player.Heal(10);
+            base.Death();
         }
-        if (player.HasThisAbility(Ability.AbilityType.HealAfterKill))
-            player.Heal(10);
-        base.Death();
     }
 }

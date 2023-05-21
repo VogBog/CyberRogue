@@ -16,7 +16,7 @@ public class OpenGarbage : HandMoveObject
         if(!isOnceOpened)
         {
             isOnceOpened = true;
-            if(Random.Range(0, 100) >= Chance)
+            if(Random.Range(0, 100) <= Chance)
             {
                 Transform transf = Instantiate(SpawnObjects[Random.Range(0, SpawnObjects.Length)], SpawnTransformTrajectory[0].position, Quaternion.identity).transform;
                 StartCoroutine(AnimIE(transf));

@@ -6,7 +6,7 @@ public class Ability : PickableItem
     { 
         None, InfinityPistol, HealAfterKill, OneMoreLife, NoFlash,
         JesusNotDie, Morningstar, FreezeHead, Shield, NoExplosions,
-        OneMoreWeapon, MoreHealth, MoreBullets
+        OneMoreWeapon, MoreHealth, MoreBullets, ShotgunShield
     }
 
     public AbilityType Type;

@@ -167,6 +167,9 @@ MonoBehaviour:
   - Object: {fileID: 2757482680810737724, guid: e59fda7655f638b4da55653463735b89,
       type: 3}
     Cost: 10
+  - Object: {fileID: 2757482680810737724, guid: cb2fbdd0f9c524f4780f43960936633a,
+      type: 3}
+    Cost: 8
 --- !u!1 &3148114217287841704
 GameObject:
   m_ObjectHideFlags: 0

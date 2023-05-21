@@ -162,6 +162,7 @@ MonoBehaviour:
   PCChooseCursor: {fileID: 1589737989}
   SunLight: {fileID: 814402457}
   PlayerDeadPosition: {fileID: 0}
+  WinSound: {fileID: 0}
   IsAutoSafe: 0
 --- !u!4 &2374552
 Transform:
@@ -198,7 +199,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh69748
+  m_Name: pb_Mesh122406
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1215,7 +1216,7 @@ PrefabInstance:
     - target: {fileID: 8311804426787902986, guid: 9fbee3d81ed1b4f4782f1a3f0113af7f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8311804426787902986, guid: 9fbee3d81ed1b4f4782f1a3f0113af7f,
         type: 3}
@@ -3003,6 +3004,7 @@ MonoBehaviour:
   - {fileID: 6610567274357656426, guid: 2aac144152e98fd41a343bedb44a80cc, type: 3}
   - {fileID: 6610567274357656426, guid: 26e25b4ff034c7744a3746abe2a8a551, type: 3}
   - {fileID: 6610567274357656426, guid: e59fda7655f638b4da55653463735b89, type: 3}
+  - {fileID: 6610567274357656426, guid: cb2fbdd0f9c524f4780f43960936633a, type: 3}
   AllLevelRooms:
   - {fileID: 1487113816549352956, guid: c5de0b1b8a07d8244b4ab348951930e7, type: 3}
   - {fileID: 1487113816549352956, guid: 4c77c74f2855d05428164f4d8b37203b, type: 3}
@@ -3023,6 +3025,7 @@ MonoBehaviour:
   - {fileID: 8841470650652111889, guid: 97103a79eae93e84187e981a0f6dfb5f, type: 3}
   - {fileID: 8841470650652111889, guid: 056d7b5fe4d5adf498c4e19201dd38a2, type: 3}
   - {fileID: 8841470650652111889, guid: 498139962b6eab74a9b2775fe5bd9a30, type: 3}
+  Mixer: {fileID: 24100000, guid: 7a096051e7af9304781c37ff037351ff, type: 2}
 --- !u!4 &1399271069
 Transform:
   m_ObjectHideFlags: 0
@@ -6183,7 +6186,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2068596993
 MonoBehaviour:

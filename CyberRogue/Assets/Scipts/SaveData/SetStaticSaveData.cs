@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SetStaticSaveData : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class SetStaticSaveData : MonoBehaviour
     public BaseWeapon[] AllWeapons;
     public LevelRoom[] AllLevelRooms;
     public Ability[] AllAbilities;
+    public AudioMixer Mixer;
 
     private void Start()
     {
@@ -17,5 +17,6 @@ public class SetStaticSaveData : MonoBehaviour
         StaticSaveData.AllWeapons = AllWeapons;
         StaticSaveData.AllLevelRooms = AllLevelRooms;
         StaticSaveData.AllAbilities = AllAbilities;
+        StaticSaveData.Mixer = Mixer;
     }
 }

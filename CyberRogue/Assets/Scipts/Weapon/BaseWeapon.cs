@@ -37,6 +37,8 @@ public abstract class BaseWeapon : PickableItem
 
     protected override bool canPick(BasePlayer player) => true;
 
+    public virtual bool IsShotgunShieldActivate() => false;
+
     protected override void PickItem(BasePlayer player)
     {
         if (PickGO)

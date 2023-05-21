@@ -36,6 +36,8 @@ public class BaseEnemy : DestroyableByWeapon
     private Coroutine freezeCor;
     private Coroutine[] fireLinesCor;
 
+    public bool IsNotRealEnemy { get; private set; }
+
     public void StartWave(Transform[] spots, NearPlayerSpot[] nearPlayer, bool isAttacker, BasePlayer player)
     {
         Agent.enabled = true;
@@ -54,6 +56,7 @@ public class BaseEnemy : DestroyableByWeapon
             BulletLines[i].endColor = new Color();
         }
         Agent.SetDestination(transform.position);
+        IsNotRealEnemy = Health < 10;
     }
 
     public void UpdateWaveLikeAttacker() => isAttacker = true;
@@ -171,8 +174,11 @@ public class BaseEnemy : DestroyableByWeapon
 
     protected override void Death()
     {
-        Agent.isStopped = true;
-        base.Death();
+        if (!IsDead)
+        {
+            Agent.isStopped = true;
+            base.Death();
+        }
     }
 
     public void SetFreeze(float time)

@@ -787,7 +787,7 @@ MonoBehaviour:
   Damage: 60
   MyAmmoPrefab: {fileID: 5118665808693303, guid: f6710a21dc494a34dad07c379a9be803,
     type: 3}
-  AccuracyDownSpeed: 0
+  AccuracyDownSpeed: 1
   LineRenderers:
   - {fileID: 1542773983603481369}
   LineLifeTime: 0.05
